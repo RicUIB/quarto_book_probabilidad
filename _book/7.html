@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.245">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introducción a la probabilidad para en análisis de datos - 8&nbsp; Ley de los grandes números y Teorema Central del Límite</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./6.html" rel="prev">
+<link href="./cover.jpg" rel="icon" type="image/jpeg">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./7.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Ley de los grandes números y Teorema Central del Límite</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introducción a la probabilidad para en análisis de datos</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/RicUIB/Enlaces" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Prerrequisitos: Teoría de conjuntos y combinatoria{-}</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Probabilidad</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Variables Aleatorias</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Distribuciones Notables</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Variables Aleatorias. Complementos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Vectores aleatorios bidimensionales</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Vectores aleatorios</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./7.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Ley de los grandes números y Teorema Central del Límite</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#muestras-aleatorias-simples" id="toc-muestras-aleatorias-simples" class="nav-link active" data-scroll-target="#muestras-aleatorias-simples"><span class="header-section-number">8.1</span> Muestras aleatorias simples</a>
+  <ul class="collapse">
+  <li><a href="#la-distribución-de-la-media-muestral" id="toc-la-distribución-de-la-media-muestral" class="nav-link" data-scroll-target="#la-distribución-de-la-media-muestral"><span class="header-section-number">8.1.1</span> La distribución de la media muestral</a></li>
+  </ul></li>
+  <li><a href="#convergencia-de-sucesiones-de-variables-aleatorias" id="toc-convergencia-de-sucesiones-de-variables-aleatorias" class="nav-link" data-scroll-target="#convergencia-de-sucesiones-de-variables-aleatorias"><span class="header-section-number">8.2</span> Convergencia de sucesiones de variables aleatorias</a>
+  <ul class="collapse">
+  <li><a href="#convergencia-casi-segura" id="toc-convergencia-casi-segura" class="nav-link" data-scroll-target="#convergencia-casi-segura"><span class="header-section-number">8.2.1</span> Convergencia casi segura</a></li>
+  <li><a href="#convergencia-en-probabilidad" id="toc-convergencia-en-probabilidad" class="nav-link" data-scroll-target="#convergencia-en-probabilidad"><span class="header-section-number">8.2.2</span> Convergencia en probabilidad</a></li>
+  <li><a href="#convergencia-en-ley-o-en-distribución" id="toc-convergencia-en-ley-o-en-distribución" class="nav-link" data-scroll-target="#convergencia-en-ley-o-en-distribución"><span class="header-section-number">8.2.3</span> Convergencia en ley o en distribución</a></li>
+  <li><a href="#relaciones-entre-las-distintas-convergencias" id="toc-relaciones-entre-las-distintas-convergencias" class="nav-link" data-scroll-target="#relaciones-entre-las-distintas-convergencias"><span class="header-section-number">8.2.4</span> Relaciones entre las distintas convergencias</a></li>
+  </ul></li>
+  <li><a href="#leyes-de-los-grandes-números" id="toc-leyes-de-los-grandes-números" class="nav-link" data-scroll-target="#leyes-de-los-grandes-números"><span class="header-section-number">8.3</span> Leyes de los grandes números</a>
+  <ul class="collapse">
+  <li><a href="#leyes-débiles-de-los-grandes-números" id="toc-leyes-débiles-de-los-grandes-números" class="nav-link" data-scroll-target="#leyes-débiles-de-los-grandes-números"><span class="header-section-number">8.3.1</span> Leyes débiles de los grandes números</a></li>
+  <li><a href="#convergencia-de-los-momentos-muestrales" id="toc-convergencia-de-los-momentos-muestrales" class="nav-link" data-scroll-target="#convergencia-de-los-momentos-muestrales"><span class="header-section-number">8.3.2</span> Convergencia de los momentos muestrales</a></li>
+  <li><a href="#leyes-fuertes-de-los-grandes-números" id="toc-leyes-fuertes-de-los-grandes-números" class="nav-link" data-scroll-target="#leyes-fuertes-de-los-grandes-números"><span class="header-section-number">8.3.3</span> Leyes fuertes de los grandes números</a></li>
+  </ul></li>
+  <li><a href="#teorema-central-del-límite" id="toc-teorema-central-del-límite" class="nav-link" data-scroll-target="#teorema-central-del-límite"><span class="header-section-number">8.4</span> Teorema Central del Límite</a>
+  <ul class="collapse">
+  <li><a href="#teorema-central-del-límite-1" id="toc-teorema-central-del-límite-1" class="nav-link" data-scroll-target="#teorema-central-del-límite-1"><span class="header-section-number">8.4.1</span> Teorema Central del Límite</a></li>
+  <li><a href="#teorema-central-del-límite-en-la-práctica" id="toc-teorema-central-del-límite-en-la-práctica" class="nav-link" data-scroll-target="#teorema-central-del-límite-en-la-práctica"><span class="header-section-number">8.4.2</span> Teorema Central del Límite en la práctica</a></li>
+  <li><a href="#teorema-de-moivre-laplace" id="toc-teorema-de-moivre-laplace" class="nav-link" data-scroll-target="#teorema-de-moivre-laplace"><span class="header-section-number">8.4.3</span> Teorema de Moivre-Laplace</a></li>
+  <li><a href="#aproximación-de-una-suma-de-variables-poisson" id="toc-aproximación-de-una-suma-de-variables-poisson" class="nav-link" data-scroll-target="#aproximación-de-una-suma-de-variables-poisson"><span class="header-section-number">8.4.4</span> Aproximación de una suma de variables Poisson</a></li>
+  <li><a href="#corrección-de-continuidad-de-fisher" id="toc-corrección-de-continuidad-de-fisher" class="nav-link" data-scroll-target="#corrección-de-continuidad-de-fisher"><span class="header-section-number">8.4.5</span> Corrección de continuidad de Fisher</a></li>
+  <li><a href="#simulación-del-teorema-central-del-límite" id="toc-simulación-del-teorema-central-del-límite" class="nav-link" data-scroll-target="#simulación-del-teorema-central-del-límite"><span class="header-section-number">8.4.6</span> Simulación del Teorema Central del Límite</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/RicUIB/Enlaces/edit/main/7.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/RicUIB/Enlaces/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Ley de los grandes números y Teorema Central del Límite</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+<section id="muestras-aleatorias-simples" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="muestras-aleatorias-simples"><span class="header-section-number">8.1</span> Muestras aleatorias simples</h2>
+<p>El pilar básico sobre el que se sustenta la <strong>estadística inferencial</strong> es el concepto de <strong>muestra aleatoria simple</strong>.</p>
+<p>Una <strong>muestra aleatoria simple</strong>, desde el punto de vista de la probabilidad es una distribución <span class="math inline">\(n\)</span> variables aleatorias, <span class="math inline">\(X_1,\ldots, X_n\)</span> todas independientes entre sí e idénticamente distribuidas ya que queremos simular la repetición de un experimento <span class="math inline">\(n\)</span> veces de forma independiente.</p>
+<p>Por tanto, estudiar una <strong>muestra aleatoria simple</strong> equivale a estudiar su distribución.</p>
+<p>En muchos casos, nos bastará estudiar la distribución de una variable que “represente” a dicha <strong>muestra aleatoria simple</strong>: la media muestral definida como <span class="math inline">\(\overline{X}=\frac{X_1+\cdots + X_n}{n}\)</span>.</p>
+<p>Las <strong>leyes de los grandes números</strong> nos dicen que, de alguna manera (que concretaremos más adelante), la media muestral y la media poblacional se “parecen” a la larga o cuando el número de repeticiones <span class="math inline">\(n\)</span> tiende a infinito.</p>
+<p>El <strong>Teorema Central del Límite</strong> nos dice que la distribución de la media muestral tiende, sea cual sea la distribución de las variables <span class="math inline">\(X_i\)</span>, a una normal. De ahí que la <strong>distribución normal</strong> sea la más importante en probabilidades y estadística.</p>
+<section id="la-distribución-de-la-media-muestral" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="la-distribución-de-la-media-muestral"><span class="header-section-number">8.1.1</span> La distribución de la media muestral</h3>
+<p>Vamos cómo se distribuye la media de un conjunto de variables normales e idénticamente distribuidas:</p>
+<p><l class="prop">Proposición. Distribución de la media muestral de <span class="math inline">\(n\)</span> variables normales independientes e idénticamente distribuidas. </l> Sean <span class="math inline">\(X_1,\ldots, X_n\)</span> <span class="math inline">\(n\)</span> variables normales de media <span class="math inline">\(\mu\)</span> y varianza <span class="math inline">\(\sigma^2\)</span>, todas normales e independientes. Consideramos la variable <span class="math inline">\(\overline{X}=\frac{X_1+\cdots + X_n}{n}\)</span> la media muestral. Entonces la distribución de la variable aleatoria <span class="math inline">\(\overline{X}\)</span> es normal de la misma media <span class="math inline">\(\mu\)</span> de las <span class="math inline">\(X_i\)</span> y varianza <span class="math inline">\(\frac{\sigma^2}{n}\)</span>.</p>
+<div class="dem">
+<p><strong>Demostración</strong></p>
+<p>Consideramos la variable aleatoria <span class="math inline">\(n\)</span>-dimensional <span class="math inline">\(\mathbf{X}=(X_1,\ldots,X_n)\)</span>. Dicha variable tendrá la distribución normal <span class="math inline">\(n\)</span>-dimensional con vector de medias <span class="math inline">\(\mathbf{\mu}=(\mu,\ldots,\mu)^\top\)</span> y matriz de covarianzas <span class="math inline">\(\mathbf{\Sigma}\)</span> diagonal ya que recordemos que las <span class="math inline">\(X_i\)</span> son independientes y, por tanto, incorreladas o de covarianza nula: <span class="math display">\[
+\mathbf{\Sigma}=\begin{pmatrix}
+\sigma^2 &amp; 0 &amp; \ldots &amp; 0 \\
+0 &amp; \sigma^2 &amp; \ldots &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+0 &amp; 0 &amp; \ldots &amp; \sigma^2
+\end{pmatrix}.
+\]</span></p>
+<p>Para hallar la variable <span class="math inline">\(\overline{X}\)</span>, realizamos la transformación afín siguiente: <span class="math display">\[
+\overline{X}=\left(\frac{1}{n},\ldots,\frac{1}{n}\right)\cdot\begin{pmatrix} X_1 \\ X_2\\\vdots \\ X_n \end{pmatrix}.
+\]</span> Aplicando la proposición sobre la transformación afín sobre una variable normal <span class="math inline">\(n\)</span>-dimensional que vimos en el capítulo de distribuciones <span class="math inline">\(n\)</span>-dimensionales con matriz de cambio <span class="math inline">\(\mathbf{C}=\left(\frac{1}{n},\ldots,\frac{1}{n}\right)\)</span> y <span class="math inline">\(\mathbf{c}=0\)</span>, tenemos que la distribución de <span class="math inline">\(\overline{X}\)</span> será normal de media <span class="math inline">\(\mathbf{c}+\mathbf{C}\mathbf{\mu} = \mu\)</span> y varianza (o matriz de covarianzas <span class="math inline">\(1\times 1\)</span>): <span class="math display">\[
+\mathbf{C}\cdot\mathbf{\Sigma}\cdot\mathbf{C}^\top =\left(\frac{1}{n},\ldots,\frac{1}{n}\right)\cdot\begin{pmatrix}
+\sigma^2 &amp; 0 &amp; \ldots &amp; 0 \\
+0 &amp; \sigma^2 &amp; \ldots &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+0 &amp; 0 &amp; \ldots &amp; \sigma^2
+\end{pmatrix}\cdot \begin{pmatrix}\frac{1}{n}\\\frac{1}{n}\\\vdots\\\frac{1}{n}\end{pmatrix} =\frac{\sigma^2}{n}.
+\]</span></p>
+</div>
+</section>
+</section>
+<section id="convergencia-de-sucesiones-de-variables-aleatorias" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="convergencia-de-sucesiones-de-variables-aleatorias"><span class="header-section-number">8.2</span> Convergencia de sucesiones de variables aleatorias</h2>
+<p>En esta sección vamos a intentar concretar cómo la media muestral y la media poblacional de una <strong>muestra aleatoria simple</strong> se van pareciendo, así como la distribución de la <strong>media muestral</strong> se va “acercando” a la normalidad.</p>
+<p>Para ello, necesitamos introducir un conjunto de conceptos relacionados con la convergencia de variables aleatorias.</p>
+<p>En primer lugar, introduciremos el concepto de <strong>sucesión de variables aleatorias</strong>:</p>
+<p><l class="definition"> Definición de sucesión de variables aleatorias. </l> Consideremos un experimento aleatorio sobre un <strong>espacio muestral</strong> <span class="math inline">\(\Omega\)</span>. Sea <span class="math inline">\(P\)</span> una probabilidad definida sobre el conjunto de sucesos de <span class="math inline">\(\Omega\)</span>. Entonces, si <span class="math inline">\(X_1,X_2,\ldots,X_n,\ldots\)</span> son variables aleatorias definidas sobre <span class="math inline">\(\Omega,P\)</span>, diremos que forman una <strong>sucesión de variables aleatorias</strong> y lo denotaremos por <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span>.</p>
+<div class="example">
+<p><strong>Ejemplo: lanzamiento de un dado</strong></p>
+<p>Consideremos el experimento aleatorio de ir lanzando un dado no trucado. Definimos la variable aleatoria <span class="math inline">\(X_n\)</span> como el resultado del dado el lanzamiento <span class="math inline">\(n\)</span>-ésimo.</p>
+Entonces, la sucesión de variables aleatorias <span class="math inline">\(X_1,\ldots,X_n,\ldots\)</span> es la asociada al lanzamiento del dado.
+<div class="example-sol">
+<p>¡Ojo! no confundir la sucesión de variables aleatorias <span class="math inline">\(X_1,\ldots,X_n,\ldots\)</span> con la sucesión de resultados de dichas variables aleatorias <span class="math inline">\(x_1,\ldots, x_n,\ldots\)</span>. Lo primero correspondería a variables aleatorias con su función de probabilidad, esperanza, varianza, etc., y lo segundo sería simplemente una sucesión numérica de valores enteros entre 1 y 6.</p>
+</div>
+</div>
+<section id="convergencia-casi-segura" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="convergencia-casi-segura"><span class="header-section-number">8.2.1</span> Convergencia casi segura</h3>
+<p><l class="definition"> Definición de convergencia casi segura. </l> Sea <span class="math inline">\(X_1,\ldots,X_n,\ldots\)</span> una sucesión de variables aleatorias y sea <span class="math inline">\(X\)</span> una variable aleatoria definida sobre el mismo espacio muestral <span class="math inline">\(\Omega\)</span> y con la misma probabilidad de sucesos. Diremos que la sucesión <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> converge <strong>casi seguramente</strong> hacia <span class="math inline">\(X\)</span> si <span class="math display">\[
+P\left(\{w\in \Omega\ |\ \lim_{n\to\infty} X_n(w)=X(w)\}\right)=1.
+\]</span> Lo denotaremos por <span class="math inline">\(X_n\stackrel{c.s.}{\longrightarrow}X\)</span>.</p>
+<p>Es decir, si el conjunto de elementos <span class="math inline">\(w\)</span> del espacio muestral <span class="math inline">\(\Omega\)</span> que cumplen que el límite de la sucesión de números reales <span class="math inline">\((X_n(w))_n\)</span> tiende a <span class="math inline">\(X(w)\)</span> tiene probabilidad <span class="math inline">\(1\)</span>.</p>
+<p>De ahí viene el nombre de <strong>casi segura</strong>: el conjunto de valores <span class="math inline">\(w\)</span> del espacio muestral tal que la sucesión numérica <span class="math inline">\((X_n(w))_n\)</span> <strong>no converge</strong> a <span class="math inline">\(X(w)\)</span> tiene probabilidad 0.</p>
+<p>Comprobar la <strong>convergencia casi segura</strong> a partir de la definición puede ser muy complicado. Por suerte, existe la proposición siguiente que nos hace la vida más fácil:</p>
+<p><l class="prop"> Proposición. </l> Sea <span class="math inline">\(X_1,\ldots,X_n,\ldots\)</span> una sucesión de variables aleatorias y sea <span class="math inline">\(X\)</span> una variable aleatoria definida sobre el mismo espacio muestral <span class="math inline">\(\Omega\)</span> y con la misma probabilidad de sucesos. Entonces <span class="math inline">\(X_n\stackrel{c.s.}{\longrightarrow}X\)</span> si, y sólo si, para todo valor <span class="math inline">\(\epsilon &gt;0\)</span>, la serie siguiente <span class="math display">\[
+\sum_{n=1}^\infty P(|X_n-X|&gt;\epsilon),
+\]</span> es convergente.</p>
+** Ejemplo: convergencia casi segura frecuencias de un dado**
+<div class="example">
+Veamos si la sucesión <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> tiene convergencia <strong>casi segura</strong> hacia la variable <span class="math inline">\(X\)</span> cuya <strong>función de probabilidad</strong> es:
+<div class="center">
+<table class="table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(X\)</span></th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(P_X\)</span></td>
+<td><span class="math inline">\(\frac{1}{6}\)</span></td>
+<td><span class="math inline">\(\frac{1}{6}\)</span></td>
+<td><span class="math inline">\(\frac{1}{6}\)</span></td>
+<td><span class="math inline">\(\frac{1}{6}\)</span></td>
+<td><span class="math inline">\(\frac{1}{6}\)</span></td>
+<td><span class="math inline">\(\frac{1}{6}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="example">
+<p>En este caso el espacio muestral <span class="math inline">\(\Omega\)</span> es <span class="math inline">\(\Omega=\{1,2,3,4,5,6\}\)</span> y la <strong>función de probabilidad</strong> de cada <span class="math inline">\(X_i\)</span> corresponde con la tabla anterior.</p>
+<p>Seguidamente, de cara a aplica la proposición anterior, vamos a hallar la <strong>función de probabilidad</strong> de la variable <span class="math inline">\(D_n=X_n-X\)</span>. Los valores de la variable anterior son: <span class="math inline">\(D_n(\Omega)=\{-5,-4,-3,-2,-1,0,1,2,3,4,5\}\)</span>.</p>
+<p>La <strong>función de probabilidad</strong> conjunta de la variable <span class="math inline">\((X_n,X)\)</span> será al ser <span class="math inline">\(X_n\)</span> y <span class="math inline">\(X\)</span> independientes: <span class="math display">\[
+P_{X_nX}(x_n,x)=P_{X_n}(x_n)\cdot P_X(x)=\frac{1}{6}\cdot \frac{1}{6}=\frac{1}{36},
+\]</span> para todo <span class="math inline">\(x_n=1,2,3,4,5,6\)</span> y para todo <span class="math inline">\(x=1,2,3,4,5,6\)</span>.</p>
+<p>La <strong>función de probabilidad</strong> de la variable <span class="math inline">\(D_n\)</span> será: <span class="math display">\[
+\scriptsize{
+\begin{array}{rl}
+P_{D_n}(-5) &amp; =P_{X_nX}(1,6)=\frac{1}{36}, \\
+P_{D_n}(-4) &amp; =P_{X_nX}(2,6)+P_{X_nX}(1,5)=\frac{2}{36}, \\
+P_{D_n}(-3) &amp; =P_{X_nX}(3,6)+P_{X_nX}(2,5)+P_{X_nX}(1,4)=\frac{3}{36}, \\
+P_{D_n}(-2) &amp; =P_{X_nX}(4,6)+P_{X_nX}(3,5)+P_{X_nX}(2,4)+P_{X_nX}(1,3)=\frac{4}{36}, \\
+P_{D_n}(-1) &amp; =P_{X_nX}(5,6)+P_{X_nX}(4,5)+P_{X_nX}(3,4)+P_{X_nX}(2,3)+P_{X_nX}(1,2)=\frac{5}{36}, \\
+P_{D_n}(0) &amp; =P_{X_nX}(6,6)+P_{X_nX}(5,5)+P_{X_nX}(4,4)+P_{X_nX}(3,3)+P_{X_nX}(2,2)+P_{X_nX}(1,1)=\frac{6}{36}, \\
+P_{D_n}(1) &amp; =P_{X_nX}(6,5)+P_{X_nX}(5,4)+P_{X_nX}(4,3)+P_{X_nX}(3,2)+P_{X_nX}(2,1)=\frac{5}{36}, \\
+P_{D_n}(2) &amp; =P_{X_nX}(6,4)+P_{X_nX}(5,3)+P_{X_nX}(4,2)+P_{X_nX}(3,1)=\frac{4}{36}, \\
+P_{D_n}(3) &amp; =P_{X_nX}(6,3)+P_{X_nX}(5,2)+P_{X_nX}(4,1)=\frac{3}{36}, \\
+P_{D_n}(4) &amp; =P_{X_nX}(6,2)+P_{X_nX}(5,1)=\frac{2}{36}, \\
+P_{D_n}(5) &amp; =P_{X_nX}(6,1)=\frac{1}{36}.
+\end{array}
+}
+\]</span></p>
+<p>Sea <span class="math inline">\(\epsilon\)</span> un valor real entre 0 y 1: <span class="math inline">\(0&lt;\epsilon &lt;1\)</span>. Entonces el suceso <span class="math inline">\(\{|D_n|&gt;\epsilon\}\)</span> será el complementario del suceso <span class="math inline">\(\{D_n=0\}\)</span> ya que el único valor entre <span class="math inline">\(-5\)</span> y <span class="math inline">\(5\)</span> que no cumple <span class="math inline">\(|D_n|&gt;\epsilon\)</span> es el valor <span class="math inline">\(D_n=0\)</span>. Por tanto: <span class="math display">\[
+P(|D_n|&gt;\epsilon)=1-P(D_n=0)=1-P_{D_n}(0)=1-\frac{1}{6}=\frac{5}{6}.
+\]</span> La serie <span class="math inline">\(\sum\limits_{n=1}^\infty \frac{5}{6}\)</span> no es convergente de forma obvia. Por tanto, deducimos que la sucesión <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> no converge <strong>casi seguramente</strong> hacia la variable <span class="math inline">\(X\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="convergencia-en-probabilidad" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="convergencia-en-probabilidad"><span class="header-section-number">8.2.2</span> Convergencia en probabilidad</h3>
+<p><l class="definition"> Definición de convergencia en probabilidad. </l> Sea <span class="math inline">\(X_1,\ldots,X_n,\ldots\)</span> una sucesión de variables aleatorias y sea <span class="math inline">\(X\)</span> una variable aleatoria definida sobre el mismo espacio muestral <span class="math inline">\(\Omega\)</span> y con la misma probabilidad de sucesos. Diremos que la sucesión <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> converge <strong>en probabilidad</strong> hacia <span class="math inline">\(X\)</span> si para cualquier valor <span class="math inline">\(\epsilon &gt;0\)</span>, <span class="math display">\[
+\lim_{n\to\infty} P(|X_n-X|&gt;\epsilon \})=0.
+\]</span> Lo denotaremos por <span class="math inline">\(X_n\stackrel{c.p.}{\longrightarrow}X\)</span>.</p>
+<p>El límite de la probabilidad de los sucesos formados por los <span class="math inline">\(w\in\Omega\)</span> tal que <span class="math inline">\(|X_n(w)-X(w)|&gt;\epsilon\)</span> vale 0.</p>
+<p><l class="observ">Observación.</l> Una definición equivalente de <strong>convergencia en probabilidad</strong> es que para todo valor <span class="math inline">\(\epsilon &gt;0\)</span>, <span class="math display">\[
+\lim_{n\to\infty} P(|X_n(w)-X(w)|\leq \epsilon \})=1.
+\]</span> <l class="observ">Observación. </l> La convergencia <strong>casi segura</strong> implica la convergencia <strong>en probabilidad</strong> ya que si la sucesión <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> converge <strong>casi seguramente</strong> hacia <span class="math inline">\(X\)</span>, la serie <span class="math inline">\(\sum_{n=1}^\infty P(|X_n-X|&gt;\epsilon)\)</span> será convergente y, por tanto, el límite de su término <span class="math inline">\(P(|X_n-X|&gt;\epsilon)\)</span> tenderá a cero, hecho que equivale a la convergencia <strong>en probabilidad</strong>.</p>
+<p>El siguiente resultado nos puede ayudar algunas veces a comprobar la <strong>convergencia en probabilidad</strong>:</p>
+<p><l class="prop">Proposición. </l> Sea <span class="math inline">\(X_1,\ldots,X_n,\ldots\)</span> una sucesión de variables aleatorias. Sea <span class="math inline">\(\mu_n\)</span> el valor medio de la variable <span class="math inline">\(X_n\)</span>, <span class="math inline">\(E(X_n)=\mu_n\)</span> y <span class="math inline">\(\sigma_n^2\)</span> su varianza: <span class="math inline">\(\mathrm{Var}(X_n)=\sigma_n^2\)</span>. Supongamos que <span class="math inline">\(\lim_{n\to\infty}\sigma_n^2=0\)</span>. Entonces, <span class="math display">\[
+X_n-\mu_n\stackrel{c.p.}{\longrightarrow} 0.
+\]</span></p>
+<div class="dem">
+<p><strong>Demostración</strong></p>
+<p>Usando la desigualdad de Chebyschev, podemos escribir: <span class="math display">\[
+P(|X_n-\mu_n|&gt;\epsilon \}) \leq \frac{\sigma_n^2}{\epsilon^2}.
+\]</span> Tomando límite a cada parte de la desigualdad anterior tenemos: <span class="math display">\[
+0\leq \lim_{n\to\infty} P(|X_n-X|&gt;\epsilon \}) \leq \lim_{n\to\infty}\frac{\sigma_n^2}{\epsilon^2}=0,
+\]</span> de donde deducimos que <span class="math inline">\(\lim_{n\to\infty} P(|X_n-X|&gt;\epsilon \})=0\)</span>, tal como queríamos ver.</p>
+</div>
+<div class="example">
+<p><strong>Ejemplo del lanzamiento de un dado (continuación)</strong></p>
+<p>En el ejemplo anterior del lanzamiento de un dado, no hay convergencia en probabilidad ya que comprobamos que para <span class="math inline">\(0&lt;\epsilon&lt;1\)</span>,</p>
+<div class="example-sol">
+<p><span class="math display">\[
+P(|X_n-X|&gt;\epsilon)=\frac{5}{6}.
+\]</span> Por tanto, para <span class="math inline">\(0&lt;\epsilon&lt;1\)</span>, <span class="math inline">\(\lim_{n\to\infty} P(|X_n-X|&gt;\epsilon \})=\frac{5}{6}\neq 0.\)</span></p>
+</div>
+</div>
+<div class="example">
+<p><strong>Ejemplo: covergencia en probabilidad distribucione exponenciales</strong></p>
+<p>Consideremos las variables aleatorias <span class="math inline">\(X_n\)</span> con función de densidad: <span class="math display">\[
+f_{X_n}(x)=\begin{cases}
+\lambda\cdot  n\cdot\mathrm{e}^{-\lambda\cdot n\cdot  x}, &amp; \mbox{si }x&gt;0,\\
+0, &amp; \mbox{en caso contrario.}
+\end{cases}
+\]</span> Estas variables <span class="math inline">\(X_n\)</span> tienen distribución exponencial de parámetro <span class="math inline">\(\lambda\cdot n\)</span>.</p>
+<p>Veamos que <span class="math inline">\(\{X_n\}_{n=1}^\infty\stackrel{c.p}{\longrightarrow} 0\)</span>.</p>
+<div class="example-sol">
+<p>Dado <span class="math inline">\(\epsilon &gt;0\)</span>, calculemos <span class="math inline">\(P(|X_n|&gt;\epsilon \})\)</span>: <span class="math display">\[
+P(|X_n|&gt;\epsilon \}) = \int_\epsilon^\infty \lambda\cdot  n\cdot \mathrm{e}^{-\lambda\cdot  n x}\, dx =\lambda\cdot  n\cdot  \left[\frac{1}{-\lambda \cdot n}\cdot\mathrm{e}^{-\lambda\cdot  n\cdot  x}\right]_\epsilon^\infty =\mathrm{e}^{-\lambda\cdot  n\cdot  \epsilon}\stackrel{n\to\infty}{\longrightarrow} 0,
+\]</span> tal como queríamos ver.</p>
+</div>
+</div>
+</section>
+<section id="convergencia-en-ley-o-en-distribución" class="level3" data-number="8.2.3">
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="convergencia-en-ley-o-en-distribución"><span class="header-section-number">8.2.3</span> Convergencia en ley o en distribución</h3>
+<p><l class="definition"> Definición de convergencia en ley o distribución. </l> Sea <span class="math inline">\(X_1,\ldots,X_n,\ldots\)</span> una sucesión de variables aleatorias y sea <span class="math inline">\(X\)</span> una variable aleatoria definida sobre el mismo espacio muestral <span class="math inline">\(\Omega\)</span> y con la misma probabilidad de sucesos. Sea <span class="math inline">\(F_{X_n}\)</span> y <span class="math inline">\(F_X\)</span> las funciones de distribución de la variable <span class="math inline">\(X_n\)</span> y <span class="math inline">\(X\)</span>, respectivamente. Diremos que la sucesión <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> converge <strong>en ley, o en distribución</strong> hacia <span class="math inline">\(X\)</span> si, <span class="math display">\[
+\lim_{n\to\infty} F_{X_n}(x)=F(x),
+\]</span> para todo valor <span class="math inline">\(x\in\mathbb{R}\)</span>.</p>
+<p>Lo denotaremos por <span class="math inline">\(X_n\stackrel{{\cal L}}{\longrightarrow}X\)</span>.</p>
+<p>El resultado siguiente simplifica algunas veces comprobar que la sucesión <span class="math inline">\(X_n\)</span> converge en ley hacia <span class="math inline">\(X\)</span>:</p>
+<p><l class="prop"> Proposición. </l> Sea <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias y sea <span class="math inline">\(X\)</span> una variable aleatoria definida sobre el mismo espacio muestral <span class="math inline">\(\Omega\)</span> y con la misma probabilidad de sucesos. Sean <span class="math inline">\(\phi_{X_n}\)</span> y <span class="math inline">\(\phi_X\)</span> las funciones características de <span class="math inline">\(X_n\)</span> y <span class="math inline">\(X\)</span>, respectivamente. Entonces, la sucesión converge <strong>en ley</strong> hacia <span class="math inline">\(X\)</span>, <span class="math inline">\(X_n\stackrel{{\cal L}}{\longrightarrow}X\)</span>, si, y sólo si, <span class="math display">\[
+\lim_{n} \phi_{X_n}(t) = \phi_X(t),
+\]</span> para cualquier número <span class="math inline">\(t\in\mathbb{R}\)</span>.</p>
+<div class="example">
+<p><strong>Ejemplo de la distribución binomial <span class="math inline">\(B(n,p)\)</span></strong></p>
+Veamos que si <span class="math inline">\(X_n=B(n,p_n)\)</span> tiene distribución binomial de parámetros <span class="math inline">\(n\)</span> y <span class="math inline">\(p_n\)</span>, con <span class="math inline">\(p_n=\frac{\lambda}{n}\)</span>, con <span class="math inline">\(\lambda\)</span> fijo, <span class="math display">\[
+B(n,p)\stackrel{{\cal L}}{\longrightarrow}Poiss(\lambda).
+\]</span>
+<div class="example-sol">
+<p>En el tema de distribuciones notables demostramos que para todo <span class="math inline">\(k\in\{0,\ldots,n\}\)</span>, <span class="math display">\[
+P(X_n = k)=\binom{n}{k}\cdot p_n^k\cdot (1-p_n)^{n-k}\stackrel{n\to\infty}{\longrightarrow} P(X=k)=\frac{\lambda^k}{k!}\cdot\mathrm{e}^{-\lambda}.
+\]</span> Entonces tenemos que dado <span class="math inline">\(x\in\mathbb{R}\)</span>, existe <span class="math inline">\(k\in\{0,\ldots,n\}\)</span>, tal que <span class="math inline">\(k\leq x&lt; k+1\)</span>. Por tanto, <span class="math display">\[
+\begin{array}{rl}
+\lim\limits_{n\to\infty} F_{X_n}(x)
+&amp; = \lim\limits_{n\to\infty} F_{X_n}(k)=\lim\limits_{n\to\infty} P(X_n=0)+\cdots + P(X_n=k) \\
+&amp; =\lim\limits_{n\to\infty} P(X_n=0)+\cdots + \lim\limits_{n\to\infty} P(X_n=k)\\
+&amp; = P(X=0)+\cdots + P(X=k)\\ &amp;  =F_X(k)=F_X(x),
+\end{array}
+\]</span> tal como queríamos demostrar.</p>
+</div>
+</div></section>
+<section id="relaciones-entre-las-distintas-convergencias" class="level3" data-number="8.2.4">
+<h3 data-number="8.2.4" class="anchored" data-anchor-id="relaciones-entre-las-distintas-convergencias"><span class="header-section-number">8.2.4</span> Relaciones entre las distintas convergencias</h3>
+<p>El resultado siguiente nos dice cuando un tipo de convergencia implica la otra:</p>
+<p><l class="prop"> Proposición. </l> Sea <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias y sea <span class="math inline">\(X\)</span> una variable aleatoria definida sobre el mismo espacio muestral <span class="math inline">\(\Omega\)</span> y con la misma probabilidad de sucesos. Entonces:</p>
+<ul>
+<li><p>Si <span class="math inline">\(X_n\stackrel{c.s.}{\longrightarrow} X\)</span>, entonces <span class="math inline">\(X_n\stackrel{c.p.}{\longrightarrow} X\)</span>.</p></li>
+<li><p>Si <span class="math inline">\(X_n\stackrel{c.p.}{\longrightarrow} X\)</span>, entonces <span class="math inline">\(X_n\stackrel{{\cal L}}{\longrightarrow} X\)</span>.</p></li>
+</ul>
+<p>En resumen, la convergencia más fuerte es la <strong>casi segura</strong>, luego vendría la convergencia <strong>en probabilidad</strong> y, por último, la convergencia <strong>en ley</strong>:</p>
+<p><span class="math display">\[
+\mbox{Conv. casi segura }\Rightarrow \mbox{ Conv. en probabilidad }\Rightarrow\mbox{ Conv. en ley.}
+\]</span></p>
+</section>
+</section>
+<section id="leyes-de-los-grandes-números" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="leyes-de-los-grandes-números"><span class="header-section-number">8.3</span> Leyes de los grandes números</h2>
+<p>Como ya comentamos al principio del tema, las <strong>leyes de los grandes números</strong> estudian el comportamiento de la <strong>media muestral</strong> <span class="math inline">\(\overline{X}_n\)</span> cuando la sucesión de variables aleatorias <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> se va hacia infinito.</p>
+<p>Más concretamente, diremos que una sucesión de variables aleatorias <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> cumple una <strong>ley de los grandes números</strong> si existe un sucesión numérica <span class="math inline">\((a_n)_n\)</span> tal que la sucesión de variables aleatorias <span class="math inline">\(\{\overline{X}_n-a_n\}\)</span> converge “de alguna manera” de las que hemos visto hacia 0.</p>
+<p>Si este “alguna manera” es la convergencia más fuerte, o la <strong>casi segura</strong>, tendremos la <strong>ley fuerte de los grandes números</strong>.</p>
+<p>En cambio, si la convergencia es <strong>en probabilidad</strong>, tendremos la <strong>ley débil de los grandes números</strong>.</p>
+<section id="leyes-débiles-de-los-grandes-números" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="leyes-débiles-de-los-grandes-números"><span class="header-section-number">8.3.1</span> Leyes débiles de los grandes números</h3>
+<p><l class="prop"> Teorema. Ley débil de los grandes números. </l> Sea <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias independientes dos a dos tal que sus varianzas existen y están acotadas por una constante independiente de <span class="math inline">\(n\)</span>. Entonces, <span class="math display">\[
+\overline{X}_n-\frac{1}{n}\sum_{i=1}^n \mu_i\stackrel{c.p.}{\longrightarrow} 0,
+\]</span> donde <span class="math inline">\(\mu_i = E(X_i)\)</span>.</p>
+<p>Dicho en otras palabras: en las condiciones de la proposición anterior, la diferencia entre la sucesión de <strong>medias muestrales</strong> como variables aleatorias y la sucesión numérica de la medias poblacionales de dichas variables aleatorias tiende en <strong>probabilidad</strong> hacia 0.</p>
+<div class="dem">
+<p><strong>Demostración</strong></p>
+<p>Como las variables son independientes dos a dos la varianza de la suma es la suma de las varianzas: <span class="math display">\[
+\mathrm{Var}(\overline{X}_n)=\frac{1}{n^2}\mathrm{Var}(\sum_{i=1}^n X_i)=\frac{1}{n^2}\sum_{i=1}^n \sigma_i^2,
+\]</span> donde <span class="math inline">\(\sigma_i^2 = \mathrm{Var}(X_i)\)</span>.</p>
+<p>Sabemos por hipótesis que existe una constante <span class="math inline">\(M\)</span> tal que <span class="math inline">\(\sigma_i^2\leq M\)</span> para todo <span class="math inline">\(i\)</span>. Por tanto, <span class="math display">\[
+\mathrm{Var}(\overline{X}_n)=\frac{1}{n^2}\sum_{i=1}^n \sigma_i^2\leq \frac{1}{n^2}Mn =\frac{M}{n}.
+\]</span></p>
+<p>El valor del valor medio de la media muestral será: <span class="math display">\[
+E(\overline{X}_n)=\frac{1}{n}\sum_{i=1}^n E(X_i)=\frac{1}{n}\sum_{i=1}^n \mu_i.
+\]</span> Usando la desigualdad de Chebyschev, deducimos, dado un <span class="math inline">\(\epsilon &gt;0\)</span>: <span class="math display">\[
+P\left(\left|\overline{X}_n-\frac{1}{n}\sum_{i=1}^n \mu_i\right|&gt;\epsilon\right) \leq \frac{\mathrm{Var}(\overline{X}_n)}{\epsilon^2}\leq \frac{M}{n\epsilon^2}.
+\]</span> Por tanto, tomando límites en las dos partes de la desigualdad anterior, deducimos <span class="math display">\[
+\lim_{n\to \infty}P\left(\left|\overline{X}_n-\frac{1}{n}\sum_{i=1}^n \mu_i\right|&gt;\epsilon\right) =0,
+\]</span> tal como queríamos ver.</p>
+</div>
+<p>Del teorema anterior obtenemos las consecuencias siguientes:</p>
+<p><l class="prop">Corolario. </l> Sea <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias independientes dos a dos tal que todas tienes la misma esperanza <span class="math inline">\(\mu\)</span> y la misma varianza <span class="math inline">\(\sigma^2\)</span>. Entonces, <span class="math display">\[
+\overline{X}_n\stackrel{c.p.}{\longrightarrow} \mu,
+\]</span></p>
+<div class="dem">
+<p><strong>Demostración</strong></p>
+<p>En este caso tenemos que <span class="math inline">\(\mu_i=\mu\)</span> y, por tanto, <span class="math inline">\(\frac{1}{n}\sum\limits_{i=1}^n \mu_i =\frac{1}{n}\cdot n\mu=\mu\)</span>. Si aplicamos el teorema de la <strong>ley débil de los grandes números</strong> nos sale el resultado enunciado.</p>
+</div>
+<p><l class="prop">Corolario. </l> Sea <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias independientes dos a dos e idénticamente distribuidas tal que todas tienes la misma esperanza <span class="math inline">\(\mu\)</span>. Entonces, <span class="math display">\[
+\overline{X}_n\stackrel{c.p.}{\longrightarrow} \mu,
+\]</span></p>
+<div class="dem">
+<p><strong>Demostración</strong></p>
+<p>Trivial a partir del Corolario anterior.</p>
+</div>
+<div class="example">
+<p><strong>Ejemplo: lanzamiento de una moneda</strong></p>
+<p>Vamos a simular la <strong>ley débil de los grandes números</strong> en el caso en que el experimento aleatorio sea el lanzamiento de una moneda.</p>
+<p>En este caso, tendremos que las variables aleatorias <span class="math inline">\(X_n\)</span> tendrán distribución de Bernoulli de parámetro <span class="math inline">\(p=\frac{1}{2}\)</span>.</p>
+<p>La variable <span class="math inline">\(\overline{X}_n\)</span> representa la proporción de caras (<span class="math inline">\(X_n=1\)</span>) en el lanzamiento de la moneda <span class="math inline">\(n\)</span> veces. Nos preguntamos si dicha proporción de caras tiende al parámetro <span class="math inline">\(p\)</span> en probabilidad.</p>
+<div class="example-sol">
+<p>Vamos a hallar una muestra para cada variable <span class="math inline">\(\overline{X}_n=\frac{\sum\limits_{i=1}^n X_i}{n}\)</span>.</p>
+<p>Para ello, vamos a repetir el experimento de lanzar la moneda <span class="math inline">\(N=100\)</span> veces y lo repetimos <span class="math inline">\(k=500\)</span> ocasiones.</p>
+<p>Los resultados estarán en una matriz <span class="math inline">\(k\times N =500\times 100\)</span> donde cada fila de la matriz simulará una repetición del experimento de lanzar la moneda <span class="math inline">\(N=100\)</span> veces.</p>
+<p>Dada la fila <span class="math inline">\(i\)</span>-ésima, iremos calculando <span class="math inline">\(\overline{X}_1^{(i)},\overline{X}_2^{(i)},\ldots,\overline{X}_{N=100}^{(i)}\)</span>.</p>
+<p>Luego, fijado un <span class="math inline">\(\epsilon\)</span>, para cada <span class="math inline">\(n\)</span>, aproximaremos la probabilidad <span class="math inline">\(P\left(\left|\overline{X}_n-\frac{1}{2}\right|&gt;\epsilon\right)\)</span> usando la fórmula de Laplace: <span class="math display">\[
+p_n=P\left(\left|\overline{X}_n-\frac{1}{2}\right|&gt;\epsilon\right) \approx\frac{\#\left\{\mbox{$i$ tal que  $\left|\overline{X}_n^{(i)}-\frac{1}{2}\right|&gt;\epsilon$}\right\}}{k}.
+\]</span></p>
+<p>Para comprobar dicha afirmación, la idea es hallar para cada valor <span class="math inline">\(n\)</span>, una muestra para cada variable <span class="math inline">\(\overline{X}_n=\frac{\sum\limits_{i=1}^n X_i}{n}\)</span>.</p>
+<p>Para hallar una muestra de cada variable <span class="math inline">\(\overline{X}_n\)</span>, seguimos los pasos siguientes:</p>
+<ul>
+<li>En primer lugar, simulamos la repetición del experimento de lanzar la moneda <span class="math inline">\(N=100\)</span> veces y lo repetimos <span class="math inline">\(k=500\)</span> ocasiones. Los resultados estarán en una matriz <span class="math inline">\(k\times N =500\times 100\)</span> donde cada fila de la matriz simulará una repetición del experimento de lanzar la moneda <span class="math inline">\(N=100\)</span> veces:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>N<span class="ot">=</span><span class="dv">100</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>k<span class="ot">=</span><span class="dv">500</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2019</span>) </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">## fijamos la semila de aleatoriedad</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="do">## por reproducibilidad</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>valores.experimento<span class="ot">=</span><span class="fu">matrix</span>(<span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),N<span class="sc">*</span>k,<span class="at">replace=</span><span class="cn">TRUE</span>),k,N)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Los primeros resultados son:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]
+[1,]    0    1    1    1    1    1    1    0    1     1     0     0
+[2,]    0    0    0    0    0    1    0    1    1     0     1     1
+[3,]    1    1    1    0    0    1    1    0    0     1     0     1
+[4,]    0    0    1    1    1    0    0    0    1     1     0     1
+[5,]    0    1    1    1    1    1    0    1    0     1     1     1</code></pre>
+</div>
+</div>
+<p>…</p>
+<ul>
+<li>En segundo lugar, dada la fila <span class="math inline">\(i\)</span>-ésima de la matriz anterior, iremos calculando <span class="math inline">\(\overline{X}_1^{(i)},\overline{X}_2^{(i)},\ldots,\overline{X}_{N=100}^{(i)}\)</span> guardando los resultados en una matriz de medias muestrales. Antes de nada, creamos la función que nos realizará la operación anterior dado un vector cualquiera <code>x</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cálculo.xnbarra <span class="ot">=</span> <span class="cf">function</span>(x){</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">cumsum</span>(x)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(x)))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A partir de la matriz de los resultados, aplicamos la función anterior a cada fila y hallaremos una matriz con todas las <span class="math inline">\(\overline{X}_n^{(i)}\)</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>matriz.medias.muestrales <span class="ot">=</span> <span class="fu">t</span>(<span class="fu">apply</span>(valores.experimento,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="dv">1</span>,cálculo.xnbarra))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La columna <span class="math inline">\(j\)</span>-ésima de la matriz <code>matriz.medias.muestrales</code> contiene una muestra de <span class="math inline">\(k=500\)</span> valores de la variable <span class="math inline">\(\overline{X}_j\)</span>.</p>
+<ul>
+<li>En último lugar, fijado un <span class="math inline">\(\epsilon\)</span>, para cada <span class="math inline">\(n\)</span>, aproximaremos la probabilidad <span class="math inline">\(P\left(\left|\overline{X}_n-\frac{1}{2}\right|&gt;\epsilon\right)\)</span> usando la fórmula de Laplace: <span class="math display">\[
+p_n=P\left(\left|\overline{X}_n-\frac{1}{2}\right|&gt;\epsilon\right) \approx\frac{\#\left\{\mbox{$i$ tal que  $\left|\overline{X}_n^{(i)}-\frac{1}{2}\right|&gt;\epsilon$}\right\}}{k}.
+\]</span> La columna <span class="math inline">\(j\)</span>-ésima de la matriz <code>matriz.medias.muestrales</code> es una muestra de la variable <span class="math inline">\(\overline{X}_j\)</span>. Por tanto, para hallar la aproximación de <span class="math inline">\(p_n\)</span>, miramos cuántos valores de la columna <span class="math inline">\(j\)</span>-ésima de la matriz anterior verifican <span class="math inline">\(\left|\overline{X}_j^{l}-\frac{1}{2}\right|&gt;\epsilon\)</span>, para <span class="math inline">\(l=1,\ldots, k\)</span>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>epsilon<span class="ot">=</span><span class="fl">0.1</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>probabilidades.pn<span class="ot">=</span> <span class="fu">colSums</span>(<span class="fu">abs</span>(matriz.medias.muestrales<span class="fl">-0.5</span>) <span class="sc">&gt;</span> epsilon)<span class="sc">/</span>k</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para ver los resultados, dibujamos el gráfico <span class="math inline">\(n\)</span> vs.&nbsp;<span class="math inline">\(p_n\)</span>:</p>
+<div class="center">
+<div class="cell" data-fig="true">
+<div class="cell-output-display">
+<p><img src="7_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>Observamos que las probabilidades tienden a cero tal como nos dice el <strong>Teorema de la ley débil de los grandes números</strong>.</p>
+</div>
+</div>
+</section>
+<section id="convergencia-de-los-momentos-muestrales" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="convergencia-de-los-momentos-muestrales"><span class="header-section-number">8.3.2</span> Convergencia de los momentos muestrales</h3>
+<p>´Dada una sucesión de variables aleatorias, definimos los momentos muestrales de la forma siguiente:</p>
+<p><l class="definition"> Definición de los momentos muestrales de una sucesión de variables aleatorias.</l> Sea <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias. Dado <span class="math inline">\(k\)</span> valor entero positivo, definimos el <strong>momento muestral</strong> de orden <span class="math inline">\(k\)</span> como la sucesión de variables aleatorias siguientes: <span class="math display">\[
+M_k^{(n)} = \frac{1}{n}\sum_{i=1}^n X_i^k.
+\]</span></p>
+<p><l class="observ"> Observación: </l> el <strong>momento muestral</strong> de orden <span class="math inline">\(k=1\)</span> es la <strong>media muestral</strong> <span class="math inline">\(\overline{X}_n\)</span>.</p>
+<p><l class="definition"> Definición de los momentos muestrales centrados de una sucesión de variables aleatorias.</l> Sea <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias. Dado <span class="math inline">\(k\)</span> valor entero positivo, definimos el <strong>momento muestral centrado en la media</strong> de orden <span class="math inline">\(k\)</span> como la sucesión de variables aleatorias siguientes: <span class="math display">\[
+MC_k^{(n)} = \frac{1}{n}\sum_{i=1}^n (X_i-\overline{X}_n)^k.
+\]</span></p>
+<p><l class="observ"> Observación: </l> el <strong>momento muestral centrado en la media</strong> de orden <span class="math inline">\(k=2\)</span> es la <strong>varianza muestral</strong> <span class="math inline">\(S_{X_n}^2\)</span>.</p>
+<p><l class="definition"> Definición de la covarianza y el coeficiente de correlación muestral de una sucesión de variables aleatorias.</l> Sea <span class="math inline">\(\{(X_n,Y_n)\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias bidimensionales. Definimos la <strong>covarianza muestral</strong> como la sucesión de variables aleatorias siguientes: <span class="math display">\[
+S_{X_n,Y_n} = \frac{1}{n}\sum_{i=1}^n (X_i-\overline{X}_n)(Y_i-\overline{Y}_n),
+\]</span> y el <strong>coeficiente de correlación muestral</strong> como la sucesión de variables aleatorias siguientes: <span class="math display">\[
+R_{X_n,Y_n}=\frac{S_{X_n,Y_n}}{\sqrt{S_{X_n}^2 S_{Y_n}^2}}.
+\]</span></p>
+<p>Dada <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias y <span class="math inline">\(k\)</span> un valor entero positivo, en el tema de Complementos de variables aleatorias, definimos los momentos y los momentos centrales de orden <span class="math inline">\(k\)</span> para cada de dichas variables como: <span class="math display">\[
+m_k^{(n)} = E\left(X_n^k\right),\quad\mu_k^{(n)}=E\left(\left(X_n-\mu_n\right)^k\right),
+\]</span> donde <span class="math inline">\(\mu_n\)</span> es el valor medio de la variable <span class="math inline">\(X_n\)</span>: <span class="math inline">\(\mu_n = E(X_n)\)</span>.</p>
+<p>Así mismo, dada <span class="math inline">\(\{(X_n,Y_n)\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias bidimensionales, en el tema de variables aleatorias bidimensionales definimos para cada variable <span class="math inline">\((X_n,Y_n)\)</span> la covarianza <span class="math inline">\(\sigma_{X_nY_n}\)</span> y el coeficiente de correlación <span class="math inline">\(\rho_{X_nY_n}\)</span>: <span class="math display">\[
+\sigma_{X_nY_n}=E((X_n-\mu_{X_n})(Y_n-\mu_{Y_n})),\quad \rho_{X_nY_n}=\frac{\sigma_{X_nY_n}}{\sqrt{\sigma_{X_n}^2\sigma_{Y_n}^2}}.
+\]</span></p>
+<p>Dada una sucesión de variables aleatorias <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span>, el resultado siguiente nos relaciona los <strong>momentos muestrales</strong> y los <strong>momentos muestrales centrados en la media</strong> con los <strong>momentos</strong> y los <strong>momentos centrales</strong> de cada variable:</p>
+<p><l class="prop"> Teorema. Convergencia de los momentos muestrales y los momentos muestrales centrados en la media. </l> Sea <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias <strong>independientes dos a dos e idénticamente distribuidas</strong> y dado un entero positivo <span class="math inline">\(k\)</span>, supongamos que para cada <span class="math inline">\(n\)</span>, existe el <strong>momento de orden <span class="math inline">\(k\)</span></strong>, <span class="math inline">\(m_k\)</span> y el <strong>momento central de orden <span class="math inline">\(k\)</span></strong>, <span class="math inline">\(\mu_k\)</span>, que no dependerán de <span class="math inline">\(n\)</span> al ser idénticamente distribuidas. Entonces las sucesiones de variables aleatorias <span class="math inline">\(\{M_n^{(k)}\}_{n=1}^\infty\)</span> y <span class="math inline">\(\{MC_n^{(k)}\}_{n=1}^\infty\)</span> tienden a <span class="math inline">\(m_k\)</span> y <span class="math inline">\(\mu_k\)</span>, respectivamente, en <strong>probabilidad</strong> <span class="math display">\[
+M_n^{(k)}\stackrel{c.p.}{\longrightarrow} m_k,\quad MC_n^{(k)}\stackrel{c.p.}{\longrightarrow} \mu_k.
+\]</span></p>
+<div class="dem">
+<p><strong>Demostración</strong></p>
+<p>Consideremos la sucesión de variables aleatorias <span class="math inline">\(\{X_n^k\}_{n=1}^\infty\)</span>. Como las variables aleatorias de la sucesión <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> son independientes dos a dos e idénticamente distribuidas, las variables de la sucesión <span class="math inline">\(\{X_n^k\}_{n=1}^\infty\)</span> también lo serán.</p>
+<p>La idea es aplicar la <strong>ley débil de los grandes números</strong> a la sucesión anterior.</p>
+<p>El valor medio de cada variable de la sucesión <span class="math inline">\(\{X_n^k\}_{n=1}^\infty\)</span> será: <span class="math inline">\(\tilde{\mu}_n^{(k)}= E(X_n^{k})=m_k\)</span> el momento de orden <span class="math inline">\(k\)</span>.</p>
+<p>Entonces, si hacemos <span class="math inline">\(\frac{1}{n}\sum\limits_{i=1}^n \tilde{\mu}_n^{(k)}\)</span> obtenemos: <span class="math inline">\(\frac{1}{n} n\cdot m_k=m_k.\)</span></p>
+<p>Aplicando la <strong>ley débil de los grandes números</strong> a la sucesión <span class="math inline">\(\{X_n^k\}_{n=1}^\infty\)</span>, tendremos que <span class="math display">\[
+\overline{X^k}_n \stackrel{c.p.}{\longrightarrow}m_k,
+\]</span> pero <span class="math inline">\(\overline{X^k}_n\)</span> vale: <span class="math display">\[
+\overline{X^k}_n=\frac{1}{n}\sum_{i=1}^n X_i^k,
+\]</span> variable aleatoria que coincide con el momento muestral de orden <span class="math inline">\(k\)</span>, <span class="math inline">\(M_n^{(k)}\)</span>, tal como queríamos demostrar.</p>
+<p>Dejamos como ejercicio la demostración de los momentos centrales. Razonando de la misma manera, no tiene dificultad alguna.</p>
+</div>
+<p>Enunciemos ahora el resultado para las covarianzas y las correlaciones muestrales:</p>
+<p><l class="prop"> Teorema: convergencia de la covarianza y el coeficiente de correlación muestrales. </l> Sea <span class="math inline">\(\{(X_n,Y_n)\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias bidimensionales independientes dos a dos e idénticamente distribuidas. Sea <span class="math inline">\(\sigma_{X,Y}, \rho_{XY}\)</span> la covarianza y el coeficiente de correlación de cada par de variables que, al ser idénticamente distribuidas, no dependen de <span class="math inline">\(n\)</span>. Entonces las sucesiones de las covarianzas muestrales <span class="math inline">\(\{S_{X_n,Y_n}\}_{n=1}^\infty\)</span> y los coeficientes de correlación muestrales <span class="math inline">\(\{R_{X_nY_n}\}_{n=1}^\infty\)</span> tienden en probabilidad hacia <span class="math inline">\(\sigma_{XY}\)</span> y <span class="math inline">\(\rho_{XY}\)</span>, respectivamente: <span class="math display">\[
+S_{X_n,Y_n}\stackrel{c.p.}{\longrightarrow}\sigma_{XY},\quad R_{X_nY_n}\stackrel{c.p.}{\longrightarrow}\rho_{XY}.
+\]</span></p>
+<div class="dem">
+<p><strong>Demostración</strong></p>
+<p>Para la demostración basta aplicar la <strong>ley débil de los grandes números</strong> a las sucesiones <span class="math inline">\(\{S_{X_n,Y_n}\}_{n=1}^\infty\)</span> y <span class="math inline">\(\{R_{X_nY_n}\}_{n=1}^\infty\)</span>. Dejamos los detalles como ejercicio.</p>
+</div>
+</section>
+<section id="leyes-fuertes-de-los-grandes-números" class="level3" data-number="8.3.3">
+<h3 data-number="8.3.3" class="anchored" data-anchor-id="leyes-fuertes-de-los-grandes-números"><span class="header-section-number">8.3.3</span> Leyes fuertes de los grandes números</h3>
+<p>Vamos a dar una versión de la ley débil de los grandes números pero en lugar de tener convergencia <strong>en probabilidad</strong>, tendremos convergencia <strong>casi segura</strong>.</p>
+<p><l class="prop"> Teorema de Kolmogorov. Ley fuerte de los grandes números. </l> Sea <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias independientes y con varianza <span class="math inline">\(\sigma_n^2\)</span>. Supongamos que la serie <span class="math inline">\(\sum\limits_{n=1}^\infty \frac{\sigma_n^2}{n^2},\)</span> es convergente. Entonces la sucesión de las medias muestrales <span class="math inline">\(\{\overline{X}_n\}_{n=1}^\infty\)</span> cumplen la llamada <strong>ley fuerte de los grandes números</strong>: <span class="math display">\[
+\overline{X}_n-\frac{1}{n}\sum_{i=1}^n \mu_i \stackrel{c.s.}{\longrightarrow} 0.
+\]</span></p>
+<p>Asociados al resultado anterior tenemos los corolarios siguientes:</p>
+<p><l class="prop"> Corolario. </l> Sea <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias independientes y con varianza <span class="math inline">\(\sigma_n^2\)</span>. Supongamos que existe una constante <span class="math inline">\(M\)</span> tal que todas las varianzas están acotadas por <span class="math inline">\(M\)</span>: <span class="math inline">\(\sigma_n^2\leq M\)</span>, para todo <span class="math inline">\(n\)</span>. Entonces la sucesión de las medias muestrales <span class="math inline">\(\{\overline{X}_n\}_{n=1}^\infty\)</span> cumplen la llamada <strong>ley fuerte de los grandes números</strong>: <span class="math display">\[
+\overline{X}_n-\frac{1}{n}\sum_{i=1}^n \mu_i \stackrel{c.s.}{\longrightarrow} 0.
+\]</span></p>
+<div class="dem">
+<p><strong>Demostración</strong></p>
+<p>Si <span class="math inline">\(\sigma_n^2\leq M\)</span> para todo <span class="math inline">\(n\)</span>, la serie numérica <span class="math inline">\(\sum\limits_{n=1}^\infty \frac{\sigma_n^2}{n^2}\)</span> será convergente ya que, por el criterio de acotación, <span class="math display">\[
+\sum\limits_{n=1}^\infty \frac{\sigma_n^2}{n^2}\leq M\sum\limits_{n=1}^\infty \frac{1}{n^2},
+\]</span> que es convergente.</p>
+<p>Entonces aplicando el <strong>Teorema de Kolmogorov</strong> o la <strong>ley fuerte de los grandes números</strong>, tenemos el resultado.</p>
+</div>
+<p><l class="prop"> Corolario. </l> Sea <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias independientes de Bernoulli con el mismo parámetro <span class="math inline">\(p\)</span> que es lo mismo que decir que son idénticamente distribuidas. Entonces la sucesión de las medias muestrales convergen <strong>casi seguramente</strong> hacia <span class="math inline">\(p\)</span>: <span class="math display">\[
+\overline{X}_n \stackrel{c.s.}{\longrightarrow} p.
+\]</span></p>
+<div class="dem">
+<p><strong>Demostración</strong></p>
+<p>En este caso: <span class="math display">\[
+\frac{1}{n}\sum_{i=1}^n \mu_i = \frac{1}{n}\cdot n\cdot p=p.
+\]</span> También se verifica que <span class="math inline">\(\sigma_n^2 =p(1-p)\)</span>. Por tanto, existe una constante <span class="math inline">\(M\)</span> (<span class="math inline">\(M=p(1-p)\)</span>) tal que <span class="math inline">\(\sigma_n^2\leq M\)</span>. Aplicando el Corolario anterior, obtenemos el resultado.</p>
+</div>
+<div class="example">
+<p><strong>Ejemplo: lanzamiento moneda (continuación)</strong></p>
+<p>Vamos a repetir el ejemplo de las variables aleatorias de Bernoulli <span class="math inline">\(X_n\)</span>, todas de parámetro <span class="math inline">\(p=\frac{1}{2}\)</span> y comprobar que las proporciones de caras cuando lanzamos la moneda <span class="math inline">\(n\)</span> veces, es decir, las medias muestrales <span class="math inline">\(\overline{X}_n\)</span> tienden <strong>casi seguramente</strong> hacia <span class="math inline">\(p=\frac{1}{2}\)</span>.</p>
+<div class="example-sol">
+<p>La comprobación anterior es equivalente a ver que la serie: <span class="math display">\[
+\sum_{n=1}^\infty P(|\overline{X}_n-p|&gt;\epsilon),
+\]</span> es convergente fijado <span class="math inline">\(\epsilon &gt;0\)</span>.</p>
+<p>Recordemos que en la variable <code>probabilidades.pn</code> calculábamos las probabilidades <span class="math inline">\(P(|\overline{X}_n-p|&gt;\epsilon)\)</span> para un <span class="math inline">\(\epsilon =0.1\)</span>.</p>
+<p>Comprobar que la serie anterior es convergente es equivalente a comprobar que las sumas parciales convergen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cumsum</span>(probabilidades.pn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>El problema es que la <code>n</code> y la <code>N</code> escogidas son demasiado pequeñas. Para realizar el experimento actual tenéis que considerar <code>n=1000</code> y <code>N=5000</code>. Id con cuidado que el programa os tardará un rato.</p>
+<p>El gráfico de las sumas parciales se muestra a continuación:</p>
+<div class="center">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>N<span class="ot">=</span><span class="dv">1000</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>N,<span class="fu">cumsum</span>(probabilidades.pn),<span class="at">xlab=</span><span class="fu">expression</span>(n),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Sumas parciales"</span>,<span class="at">col=</span><span class="st">'red'</span>, <span class="at">type=</span><span class="st">'l'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="7_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<p>Como se puede observar, la serie parece que converge.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="teorema-central-del-límite" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="teorema-central-del-límite"><span class="header-section-number">8.4</span> Teorema Central del Límite</h2>
+<p>Sabemos que si una sucesión <span class="math inline">\(\{X_n\}\)</span> está formada por variables normales, la sucesión de medias muestrales <span class="math inline">\(\left\{\overline{X}_n=\frac{\sum\limits_{i=1}^n X_i}{n}\right\}_{n=1}^\infty\)</span> también son normales ya que vimos en el tema de variables multidimensionales que si aplicamos una transformación afín (y, en particular, lineal) a una variable normal multidimensional, el resultado es una normal.</p>
+<p>Para calcular la variable <span class="math inline">\(\overline{X}_n\)</span>, es obvio que la transformación lineal es la siguiente: <span class="math display">\[
+\overline{X}_n = \left(\frac{1}{n},\ldots,\frac{1}{n}\right)\cdot \begin{pmatrix}X_1 \\\vdots\\ X_n\end{pmatrix}.
+\]</span> Si además la sucesión de variables <span class="math inline">\(X_n\)</span> son normales todas con media <span class="math inline">\(\mu\)</span> y varianza <span class="math inline">\(\sigma^2\)</span>, la sucesión <span class="math inline">\(\left\{\overline{X}_n\right\}_{n=1}^\infty\)</span> serán normales de media <span class="math inline">\(\mu\)</span> y varianza <span class="math inline">\(\frac{\sigma^2}{n}\)</span>.</p>
+<p>Estandarizando las variables anteriores, podemos concluir que las variables medias estandarizadas <span class="math inline">\(Z_n =\left\{\frac{\overline{X}_n-\mu}{\frac{\sigma}{\sqrt{n}}}\right\}_{n=1}^\infty\)</span> todas son <span class="math inline">\(N(0,1)\)</span>.</p>
+<p>El <strong>Teorema Central del Límite</strong> generaliza el resultado anterior en el sentido de que si las variables <span class="math inline">\(X_n\)</span> no tienen por qué tener la distribución normal pero son independientes e idénticamente distribuidas, las variables <span class="math inline">\(Z_n\)</span> correspondientes tienden <strong>en ley</strong> a una distribución normal estándar <span class="math inline">\(N(0,1)\)</span>.</p>
+<p>En general, se dice que los valores medios de cualquier secuencia de números aproximadamente corresponde a una muestra de una normal.</p>
+<section id="teorema-central-del-límite-1" class="level3" data-number="8.4.1">
+<h3 data-number="8.4.1" class="anchored" data-anchor-id="teorema-central-del-límite-1"><span class="header-section-number">8.4.1</span> Teorema Central del Límite</h3>
+<p><l class="prop"> Teorema Central del Límite </l> Sea <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias independientes e idénticamente distribuidas con <span class="math inline">\(E(X_n)=\mu\)</span> y <span class="math inline">\(\mathrm{Var}(X_n)=\sigma^2\)</span> para todo <span class="math inline">\(n\)</span>. Entonces: <span class="math display">\[
+\frac{\sum\limits_{i=1}^n X_i-n\mu}{\sigma\sqrt{n}}\stackrel{{\cal L}}{\longrightarrow} N(0,1).
+\]</span></p>
+<p><l class="observ"> Observación. </l> Una condición equivalente a la tesis del <strong>Teorema Central del Límite</strong> es: <span class="math display">\[
+\frac{\overline{X}_n-\mu}{\frac{\sigma}{\sqrt{n}}}\stackrel{{\cal L}}{\longrightarrow} N(0,1).
+\]</span> Basta dividir por <span class="math inline">\(n\)</span> el numerador y el denominador de la tesis original del <strong>Teorema Central del Límite</strong>.</p>
+<p>Para la demostración, usaremos dos propiedades de la función característica:</p>
+<p><l class="prop"> Proposición. </l> Sea <span class="math inline">\(Y_1,\ldots, Y_n\)</span> <span class="math inline">\(n\)</span> variables aleatorias independientes. Sea <span class="math inline">\(S_n\)</span> la variable aleatoria suma de las variables anteriores, <span class="math inline">\(S_n=\sum\limits_{i=1}^n Y_i\)</span>. Entonces, para calcular <span class="math inline">\(\phi_{S_n}\)</span>, podemos usar la expresión siguiente:: <span class="math display">\[
+\phi_{S_n}(w)=\phi_{Y_1}(w)\cdots \phi_{Y_n}(w),
+\]</span> donde <span class="math inline">\(w\)</span> es cualquier valor real.</p>
+<div class="dem">
+<p><strong>Demostración de la proposición</strong></p>
+<p>Por definición: <span class="math display">\[
+\begin{array}{rl}
+\phi_{S_n}(w) &amp; =E\left(\mathrm{e}^{\mathrm{i} w S_n}\right)=E\left(\mathrm{e}^{\mathrm{i} w \sum\limits_{i=1}^n Y_i}\right) = E\left(\mathrm{e}^{i w Y_1}\cdots \mathrm{e}^{i w Y_n}\right)\\ &amp; \stackrel{\mbox{$Y_1,\ldots,Y_n$ son independientes}}{=} E\left(\mathrm{e}^{i w Y_1}\right)\cdots E\left(\mathrm{e}^{i w Y_n}\right) \\
+&amp; =\phi_{Y_1}(w)\cdots \phi_{Y_n}(w).
+\end{array}
+\]</span></p>
+</div>
+<p><l class="prop"> Proposición. </l> Sea <span class="math inline">\(Y\)</span> una variable aleatoria. Sea <span class="math inline">\(U=kY\)</span> la variable aleatoria <span class="math inline">\(Y\)</span> multiplicada por un valor real <span class="math inline">\(k\)</span>. Entonces, para calcular <span class="math inline">\(\phi_{U}\)</span>, podemos usar la expresión siguiente: <span class="math display">\[
+\phi_{U}(w)=\phi_Y(kw),
+\]</span> donde <span class="math inline">\(w\)</span> es cualquier valor real.</p>
+<div class="dem">
+<p><strong>Demostración de la proposición</strong></p>
+<p>Por definición: <span class="math display">\[
+\phi_{U}(w)=E\left(\mathrm{e}^{\mathrm{i} w U}\right) = E\left(\mathrm{e}^{\mathrm{i} w k Y}\right)=\phi_Y(kw).
+\]</span></p>
+</div>
+<div class="dem">
+<p><strong>Demostración del Teorema Central del Límite</strong></p>
+<p>Usando la proposición que vimos al introducir la <strong>convergencia en ley</strong> que dice que una sucesión <span class="math inline">\(\{X_n\}\)</span> converge <strong>en ley</strong> hacia <span class="math inline">\(X\)</span> si, y sólo si, <span class="math inline">\(\lim\limits_{\phi_{X_n}(t)}=\phi_{X}(t)\)</span>, donde <span class="math inline">\(\phi\)</span> representa la función característica y la condición anterior tiene que verificarse para todo valor <span class="math inline">\(t\in\mathbb{R}\)</span>, basta demostrar que, si tomamos <span class="math inline">\(Z_n = \frac{\sum\limits_{i=1}^n X_i-n\mu}{\sigma\sqrt{n}},\)</span></p>
+<p><span class="math display">\[
+\lim_{n\to \infty}\phi_{Z_n}(w)=\phi_Z(w),
+\]</span> para cualquier valor <span class="math inline">\(w\in\mathbb{R}\)</span>, siendo <span class="math inline">\(Z=N(0,1)\)</span>.</p>
+<p>Seguidamente, simplifiquemos la expresión <span class="math inline">\(\phi_{Z_n}(w)=\phi_{\frac{\sum\limits_{i=1}^n X_i-n\mu}{\sigma\sqrt{n}}}(w)\)</span> usando las dos proposiciones anteriores. En primer lugar, teniendo en cuenta que las variables <span class="math inline">\(\left\{\frac{X_i-\mu}{\sigma\sqrt{n}}\right\}\)</span> son independientes e idénticamente distribuidas, usando la primera proposición podemos escribir: <span class="math display">\[
+\phi_{Z_n}(w) = \left(\phi_{\frac{X-\mu}{\sigma\sqrt{n}}}(w)\right)^n,
+\]</span> donde <span class="math inline">\(X\)</span> representa cualquiera de las variables <span class="math inline">\(X_i\)</span>.</p>
+<p>Usando la segunda proposición, podemos simplificar la expresión anterior aún más: <span class="math display">\[
+\phi_{Z_n}(w) = \left(\phi_{\frac{X-\mu}{\sigma\sqrt{n}}}(w)\right)^n = \left(\phi_{X-\mu}\left(\frac{w}{\sigma\sqrt{n}}\right)\right)^n.
+\]</span></p>
+<p>Si desarrollamos por Taylor alrededor del valor <span class="math inline">\(\hat{w}=0\)</span> la función característica <span class="math inline">\(\phi_{X-\mu}\left(\hat{w}\right)\)</span> hasta segundo orden, obtenemos: <span class="math display">\[
+\scriptsize{
+\phi_{X-\mu}\left(\hat{w}\right) = \phi_{X-\mu}\left(0\right)+ \phi_{X-\mu}'\left(0\right) \hat{w}+ \phi_{X-\mu}''\left(0\right)\frac{\hat{w}^2}{2}+O(\hat{w}^3),
+}
+\]</span> donde <span class="math inline">\(O(\hat{w}^3)\)</span> simboliza los términos de orden <span class="math inline">\(\hat{w}^3\)</span> y superiores.</p>
+<p>Los valores <span class="math inline">\(\phi_{X-\mu}\left(0\right)\)</span>, <span class="math inline">\(\phi_{X-\mu}'\left(0\right)\)</span> y <span class="math inline">\(\phi_{X-\mu}''\left(0\right)\)</span> valen: (ver tema de Complementos de variables aleatorias)</p>
+<p><span class="math display">\[
+\scriptsize{
+\phi_{X-\mu}\left(0\right)=1, \ \phi_{X-\mu}'\left(0\right)=\frac{1}{\mathrm{i}}E(X-\mu)=0,\ \phi_{X-\mu}''\left(0\right)=\frac{1}{\mathrm{i}^2}E\left((X-\mu)^2\right)=-\sigma^2.
+}
+\]</span> El desarrollo anterior será: <span class="math display">\[
+\phi_{X-\mu}\left(\hat{w}\right) =1 - \frac{1}{2}\hat{w}^2\sigma^2+O(\hat{w}^3),
+\]</span></p>
+<p>Aplicando la expresión anterior para <span class="math inline">\(\hat{w}=\frac{w}{\sigma\sqrt{n}}\)</span>, obtenemos:</p>
+<p><span class="math display">\[
+\scriptsize{
+\phi_{X-\mu}\left(\frac{w}{\sigma\sqrt{n}}\right) =1 - \frac{1}{2}\left(\frac{w}{\sigma\sqrt{n}}\right)^2\sigma^2+O\left(\frac{w}{\sigma\sqrt{n}}\right)^3= 1-\frac{w^2}{2n}+O\left(\frac{w^3}{n^{\frac{3}{2}}}\right),
+}
+\]</span></p>
+<p>La función característica de la variable <span class="math inline">\(Z_n\)</span> será usando la expresión anterior: <span class="math display">\[
+\scriptsize{\phi_{Z_n}(w)=\left(\phi_{X-\mu}\left(\frac{w}{\sigma\sqrt{n}}\right)\right)^n = \left(1-\frac{w^2}{2n}+O\left(\frac{w^3}{n^{\frac{3}{2}}}\right)\right)^n}
+\]</span> El objetivo es calcular el límite de la expresión anterior: <span class="math display">\[
+\lim_{n\to \infty}\phi_{Z_n}(w) = \lim_{n\to\infty} \left(1-\frac{w^2}{2n}+O\left(\frac{w^3}{n^{\frac{3}{2}}}\right)\right)^n =
+\lim_{n\to \infty}\mathrm{e}^{n\cdot \ln \left(1-\frac{w^2}{2n}+O\left(\frac{w^3}{n^{\frac{3}{2}}}\right)\right)}.
+\]</span></p>
+<p>Usando que para <span class="math inline">\(z\approx 0\)</span>, <span class="math inline">\(\ln(1-z)=z+O(z^2)\)</span>, el límite anterior será: <span class="math display">\[
+\lim_{n\to \infty}\phi_{Z_n}(w) =
+\lim_{n\to \infty}\mathrm{e}^{n\cdot \left(-\frac{w^2}{2n}+O\left(\frac{w^4}{n^{2}}\right)\right)} = \lim_{n\to \infty}\mathrm{e}^{ \left(-\frac{w^2}{2}+O\left(\frac{w^4}{n}\right)\right)} = \mathrm{e}^{-\frac{w^2}{2}},
+\]</span> y dicha expresión coincide con la función característica de la variable <span class="math inline">\(N(0,1)\)</span>, <span class="math inline">\(\phi_{Z}(w)\)</span>.</p>
+<p>Recordad que en el tema de Complementos de variables aleatorias vimos que si la variable <span class="math inline">\(U\)</span> era <span class="math inline">\(N(\mu,\sigma)\)</span>, <span class="math inline">\(\phi_{U}(w)=\mathrm{e}^{\mathrm{i}w\mu-\frac{w^2\sigma^2}{2}}\)</span>. Aplicando la fórmula anterior para <span class="math inline">\(\mu=0\)</span> y <span class="math inline">\(\sigma=1\)</span>, obtenemos <span class="math inline">\(\phi_{Z}(w)=\mathrm{e}^{-\frac{w^2}{2}}.\)</span></p>
+</div>
+</section>
+<section id="teorema-central-del-límite-en-la-práctica" class="level3" data-number="8.4.2">
+<h3 data-number="8.4.2" class="anchored" data-anchor-id="teorema-central-del-límite-en-la-práctica"><span class="header-section-number">8.4.2</span> Teorema Central del Límite en la práctica</h3>
+<p>El <strong>Teorema Central del Límite</strong> se aplica a la práctica en la forma siguiente:</p>
+<p>Sea <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias independientes e idénticamente distribuidas con <span class="math inline">\(E(X_i)=\mu\)</span> y <span class="math inline">\(\mathrm{Var}(X_i)=\sigma^2\)</span>. Entonces, podemos aproximar para <span class="math inline">\(n\)</span> grande (<span class="math inline">\(n\geq 30\)</span>), la media muestral <span class="math inline">\(\overline{X}_n\)</span> por: <span class="math display">\[
+\overline{X}_n =\frac{1}{n}\sum_{i=1}^n X_i \approx N\left(\mu,\frac{\sigma}{\sqrt{n}}\right),
+\]</span> o también: <span class="math display">\[
+\sum_{i=1}^n X_i \approx N\left(n\mu,\sigma\sqrt{n}\right),
+\]</span></p>
+<p>Las aproximaciones anteriores se pueden obtener teniendo en cuenta que el <strong>Teorema Central del Límite</strong> nos dice que la variable <span class="math inline">\(Z_n= \frac{\sum\limits_{i=1}^n X_i-n\mu}{\sigma\sqrt{n}}\)</span> es aproximadamente una <span class="math inline">\(N(0,1)\)</span>. Por tanto, <span class="math display">\[
+\frac{\sum\limits_{i=1}^n X_i-n\mu}{\sigma\sqrt{n}} \approx N(0,1),\ \Rightarrow \sum_{i=1}^n X_i\approx \sigma\sqrt{n}\cdot N(0,1)+n\mu = N\left(n\mu,\sigma\sqrt{n}\right).
+\]</span></p>
+<p>Dividiendo por <span class="math inline">\(n\)</span> la aproximación anterior, obtenemos: <span class="math display">\[
+\overline{X}_n =\frac{1}{n}\sum_{i=1}^n X_i \approx \frac{1}{n}N\left(n\mu,\sigma\sqrt{n}\right) =N\left(\mu,\frac{\sigma}{\sqrt{n}}\right).
+\]</span></p>
+</section>
+<section id="teorema-de-moivre-laplace" class="level3" data-number="8.4.3">
+<h3 data-number="8.4.3" class="anchored" data-anchor-id="teorema-de-moivre-laplace"><span class="header-section-number">8.4.3</span> Teorema de Moivre-Laplace</h3>
+<p>Si aplicamos el <strong>Teorema Central del Límite</strong> en el caso en que las variables <span class="math inline">\(X_n\)</span> son de Bernoulli de parámetro <span class="math inline">\(p\)</span>, obtenemos el llamado <strong>Teorema de Moivre-Laplace</strong>:</p>
+<p><l class="prop"> Teorema de Moivre-Laplace </l> Sea <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias independientes Bernoulli de parámetro <span class="math inline">\(p\)</span>. La variable <span class="math inline">\(\sum\limits_{i=1}^n X_i\)</span> será binomial de parámetros <span class="math inline">\(n\)</span> y <span class="math inline">\(p\)</span>, <span class="math inline">\(B(n,p)\)</span>. Entonces: <span class="math display">\[
+\frac{B(n,p)-np}{\sqrt{n\cdot p\cdot (1-p)}}\stackrel{{\cal L}}{\longrightarrow} N(0,1).
+\]</span></p>
+<p>En la práctica, decimos que podemos aproximar una variable binomial de parámetros <span class="math inline">\(n\)</span> y <span class="math inline">\(p\)</span> por una distribución normal de parámetros <span class="math inline">\(\mu=np\)</span> y <span class="math inline">\(\sigma =\sqrt{n\cdot p\cdot (1-p)}\)</span>: <span class="math display">\[
+B(n,p)\approx N(np,\sqrt{n\cdot p\cdot (1-p)}).
+\]</span></p>
+</section>
+<section id="aproximación-de-una-suma-de-variables-poisson" class="level3" data-number="8.4.4">
+<h3 data-number="8.4.4" class="anchored" data-anchor-id="aproximación-de-una-suma-de-variables-poisson"><span class="header-section-number">8.4.4</span> Aproximación de una suma de variables Poisson</h3>
+<p>Si aplicamos el <strong>Teorema Central del Límite</strong> en el caso en que las variables <span class="math inline">\(X_n\)</span> son de Poisson de parámetro <span class="math inline">\(\lambda\)</span>, obtenemos el resultado siguiente:</p>
+<p><l class="prop"> Proposición. </l> Sea <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias independientes Poisson de parámetro <span class="math inline">\(\lambda\)</span>. Entonces: <span class="math display">\[
+\frac{\sum\limits_{i=1}^n X_i -n\lambda}{\sqrt{n\cdot \lambda}}\stackrel{{\cal L}}{\longrightarrow} N(0,1).
+\]</span></p>
+<p>Antes de ver la aplicación práctica del resultado anterior, veamos que suma de variables Poisson independientes de parámetro <span class="math inline">\(\lambda\)</span> es una variable Poisson de parámetro <span class="math inline">\(n\lambda\)</span>:</p>
+<p><l class="prop"> Proposición. </l> Sea <span class="math inline">\(\{X_n\}_{n=1}^\infty\)</span> una sucesión de variables aleatorias independientes Poisson de parámetro <span class="math inline">\(\lambda\)</span>. Entonces la variable <span class="math inline">\(\sum\limits_{i=1}^n X_i\)</span> sigue la distribución de Poisson de parámetro <span class="math inline">\(n\lambda\)</span>.</p>
+<div class="dem">
+<p><strong>Demostración</strong></p>
+<p>En primer lugar, hallemos la función característica de la distribución de Poisson de parámetro <span class="math inline">\(\lambda\)</span>. Sea <span class="math inline">\(X=Poiss(\lambda)\)</span>. Su función característica en un valor <span class="math inline">\(w\)</span> será: <span class="math display">\[
+\scriptsize{
+\phi_X(w)=E\left(\mathrm{e}^{\mathrm{i} w X}\right)=\sum_{k=0}^\infty \mathrm{e}^{i w k}\frac{\lambda^k}{k!}\mathrm{e}^{-\lambda}=\mathrm{e}^{-\lambda} \sum_{k=0}^\infty \frac{\left(\lambda\mathrm{e}^{iw}\right)^k}{k!}=\mathrm{e}^{-\lambda}\cdot \mathrm{e}^{\lambda\mathrm{e}^{iw}}=\mathrm{e}^{\lambda \left(\mathrm{e}^{iw}-1\right)}.
+}
+\]</span> Sea ahora la variable <span class="math inline">\(S_n=\sum\limits_{i=1}^n X_i\)</span>. Usando la proposición anterior que nos calcula la función característica de sumas de variables independientes, podemos escribir: <span class="math display">\[
+\phi_{S_n}(w)=\phi_{X_1}(w)\cdots \phi_{X_n}(w)=\left(\mathrm{e}^{\lambda \left(\mathrm{e}^{iw}-1\right)}\right)^n =\mathrm{e}^{n\lambda \left(\mathrm{e}^{iw}-1\right)},
+\]</span> función característica que corresponde a una variable de Poisson de parámetro <span class="math inline">\(n\lambda\)</span>, <span class="math inline">\(Poiss(n\lambda)\)</span>.</p>
+</div>
+<p>Usando la proposición anterior, tenemos que la suma de variables Poisson independientes de parámetro <span class="math inline">\(\lambda\)</span> sigue una distribución Poisson de parámetro <span class="math inline">\(n\lambda\)</span>. Por tanto, podemos escribir usando el corolario del <strong>Teorema Central del Límite</strong> aplicado a variables Poisson: <span class="math display">\[
+Poiss(n\lambda)\approx N(n\lambda,\sqrt{n\lambda}).
+\]</span></p>
+<div class="example">
+<p><strong>Ejemplo: aplicación del Teorema de Moivre-Laplace</strong></p>
+<p>Sea <span class="math inline">\(X\)</span> una distribución binomial de parámetros <span class="math inline">\(n=50\)</span> y <span class="math inline">\(p=\frac{1}{3}\)</span>.</p>
+<p>Queremos conocer <span class="math inline">\(P(X &lt; 15)\)</span> y <span class="math inline">\(P(10\leq X\leq 20)\)</span>.</p>
+<p>Vamos a calcular las probabilidades anteriores usando el <strong>Teorema de Moivre-Laplace</strong>.</p>
+<div class="example-sol">
+<p>La variable <span class="math inline">\(X\)</span> es aproximadamente una distribución normal <span class="math inline">\(X_N\)</span> de parámetros <span class="math inline">\(\mu = np=\frac{50}{3}=16.6667\)</span> y <span class="math inline">\(\sigma=\sqrt{50\cdot\frac{1}{3}\cdot \frac{2}{3}}=3.3333\)</span>.</p>
+<p>Por tanto: <span class="math display">\[
+\begin{array}{rl}
+P(X&lt; 15)
+&amp; = P(X\leq 14) \approx P(X_N \leq 14)=P\left(Z\leq \frac{14-16.6667}{3.3333}\right)\\&amp;
+=P(Z\leq -0.8) = 0.2119,\\
+\end{array}
+\]</span> <span class="math display">\[
+\begin{array}{rl}
+P(10\leq X\leq 20)
+&amp; \approx P(10\leq X_N \leq 20) = P\left(\frac{10-16.6667}{3.3333}\leq  Z\leq \frac{20-16.6667}{3.3333}\right) \\
+&amp; = P(-2\leq Z\leq 1) \\
+&amp; = P(Z\leq 1)-P(Z\leq -2)=0.8413447-0.0227501 = 0.8186,
+\end{array}
+\]</span> donde <span class="math inline">\(Z=N(0,1)\)</span>.</p>
+<p>Comparemos los valores aproximados anteriores con los valores “exactos” proporcionados por <code>R</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">14</span>,<span class="dv">50</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2612386</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">20</span>,<span class="dv">50</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)<span class="sc">-</span><span class="fu">pbinom</span>(<span class="dv">9</span>,<span class="dv">50</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8613685</code></pre>
+</div>
+</div>
+<p>Tenemos errores de 0.04938 y 0.04277, respectivamente.</p>
+<p>Aunque <span class="math inline">\(n\)</span> no es pequeño, <span class="math inline">\(n=50\)</span>, los errores anteriores no son demasiado pequeños.</p>
+<p>Una razón por la que dichos errores no son pequeños es que aproximamos una distribución discreta (Binomial) cuyos valores van de 1 en 1 por una distribución normal, que es continua.</p>
+<p>La corrección de continuidad de Fisher nos mejora la aproximación disminuyendo dichos errores.</p>
+</div>
+</div></section>
+<section id="corrección-de-continuidad-de-fisher" class="level3" data-number="8.4.5">
+<h3 data-number="8.4.5" class="anchored" data-anchor-id="corrección-de-continuidad-de-fisher"><span class="header-section-number">8.4.5</span> Corrección de continuidad de Fisher</h3>
+<p>Cuando aplicamos el <strong>Teorema Central del Límite</strong> y aproximamos una distribución discreta que tiene valores enteros por una normal, hemos de aplicar lo que se llama <strong>corrección de continuidad de Fisher</strong>.</p>
+<p>Sea <span class="math inline">\(X\)</span> la variable discreta que queremos aproximar y <span class="math inline">\(X_N\)</span> la variable normal que nos aparece cuando aplicamos el <strong>Teorema Central del Límite</strong>. Supongamos que queremos calcular <span class="math inline">\(P(X\leq k)\)</span>, para un <span class="math inline">\(k\)</span> entero. Entonces debemos hacer: <span class="math display">\[
+P(X\leq k)\approx P(X_N\leq k+0.5).
+\]</span></p>
+<p>Es decir, para tener en cuenta el valor <span class="math inline">\(k\)</span> en la aproximación <span class="math inline">\(X_N\)</span> hay que sumarle la mitad entre dos valores consecutivos (0.5 si los valores son enteros) de la variable <span class="math inline">\(X\)</span>.</p>
+<p>Id con cuidado, si queremos calcular <span class="math inline">\(P(X&lt;k)\)</span>, hay que hacer <span class="math inline">\(P(X&lt;k) =P(X\leq k-1)\approx P(X_N \leq k-1+0.5)=P(X_N\leq k-0.5)\)</span>.</p>
+<div class="example">
+<p><strong>Ejemplo: continuación ejemplo anterior</strong></p>
+Si aplicamos la continuidad de Fisher en el ejemplo anterior, obtenemos:
+<div class="example-sol">
+<p><span class="math display">\[
+\begin{array}{rl}
+P(X&lt; 15) &amp; = P(X\leq 14) \approx P(X_N \leq 14.5)=P\left(Z\leq \frac{14.5-16.6667}{3.3333}\right) =P(Z\leq -0.65) = 0.2578,
+\end{array}
+\]</span></p>
+<p><span class="math display">\[
+\begin{array}{rl}
+P(10\leq X\leq 20) &amp;= P(X\leq 20)-P(X\leq 9)\approx P(X_N \leq 20.5)-P(X_N\leq 9.5) \\ &amp; = P\left(Z\leq \frac{20.5-16.6667}{3.3333}\right) - P\left(Z\leq \frac{9.5-16.6667}{3.3333}\right)=  P(Z\leq 1.15)-P(Z\leq -2.15)\\ &amp; =0.8749281-0.0157776 = 0.8592,
+\end{array}
+\]</span> obteniendo unos errores de sólo 0.00339 y 0.00222, respectivamente.</p>
+</div>
+</div></section>
+<section id="simulación-del-teorema-central-del-límite" class="level3" data-number="8.4.6">
+<h3 data-number="8.4.6" class="anchored" data-anchor-id="simulación-del-teorema-central-del-límite"><span class="header-section-number">8.4.6</span> Simulación del Teorema Central del Límite</h3>
+<div class="example">
+<p><strong>Ejemplo de simulación de la aproximación de una variable binomial a una distribución normal</strong></p>
+<p>Para realizar la simulación anterior, consideremos una distribución binomial de parámetros <span class="math inline">\(n=100\)</span> y <span class="math inline">\(p=\frac{1}{2}\)</span>.</p>
+<p>Según el <strong>Teorema Central del Límite</strong>, tenemos que <span class="math display">\[
+\overline{X}_n=\frac{1}{n}B\left(n=100,p=\frac{1}{2}\right)\approx N\left(\mu = p=\frac{1}{2}=0.5,\sigma=\sqrt{\frac{\frac{1}{2}\cdot \frac{1}{2}}{100}}=0.05\right).
+\]</span></p>
+<p>Para ver dicha aproximación, en primer lugar vamos a generar una muestra de <span class="math inline">\(N=1000\)</span> valores de una binomial de parámetros <span class="math inline">\(n=100\)</span> y <span class="math inline">\(p=\frac{1}{2}\)</span> y dividiendo por <span class="math inline">\(n=100\)</span>, tenemos una muestra de <span class="math inline">\(\overline{X}_n\)</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>n<span class="ot">=</span><span class="dv">100</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>p<span class="ot">=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>sigma<span class="ot">=</span>p<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2019</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>muestra.binomial <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="dv">1000</span>,n,p)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>muestra.xnbarra <span class="ot">=</span> muestra.binomial<span class="sc">/</span>n</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para ver si la aproximación funciona, dibujaremos en una misma gráfica el histograma de frecuencias relativas de la muestra anterior y la curva de la función de densidad de la distribución normal de parámetros <span class="math inline">\(\mu =\frac{1}{2}\)</span> y <span class="math inline">\(\sigma = 0.05\)</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(muestra.xnbarra,<span class="at">freq=</span><span class="cn">FALSE</span>,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="fu">min</span>(muestra.xnbarra)<span class="sc">-</span><span class="fl">0.1</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">to=</span><span class="fu">max</span>(muestra.xnbarra)<span class="sc">+</span><span class="fl">0.1</span>,<span class="at">by=</span><span class="fl">0.01</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Histograma de la distribución de las medias muestrales"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"valores variable"</span>,<span class="at">ylab=</span><span class="st">"frecuencias relativas"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>mu<span class="ot">=</span>p</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>sigma.xnbarra<span class="ot">=</span><span class="fu">sqrt</span>(p<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p)<span class="sc">/</span>n)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">seq</span>(<span class="at">from=</span><span class="fu">min</span>(muestra.xnbarra),<span class="at">to=</span><span class="fu">max</span>(muestra.xnbarra),<span class="at">by=</span><span class="fl">0.01</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x,<span class="fu">dnorm</span>(x,mu,sigma.xnbarra),<span class="at">col=</span><span class="st">'red'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="7_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Observamos que la aproximación es bastante buena.</p>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./6.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Vectores aleatorios</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Introducción a la probabilidad para en análisis de datos.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Este libro se ha creado con <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
