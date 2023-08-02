@@ -1,9 +1,9 @@
 project:
   type: book
-  output-dir: _book
+  output-dir: docs
 
 book:
-  title: "Introducción a la probabilidad para en análisis de datos"
+  title: "Introducción a la probabilidad para análisis de datos"
   author: "Amphibian/Anuran community"
   date: "2/8/2023"
   reader-mode: true
@@ -38,6 +38,7 @@ format:
     theme: cosmo
   pdf:
     documentclass: scrreprt
+    linkcolor: blue
 
 
 
