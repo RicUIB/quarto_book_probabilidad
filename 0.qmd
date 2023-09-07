@@ -1,4 +1,4 @@
-# Prerrequisitos: Teoría de conjuntos y combinatoria{-}
+# Prerrequisitos: Teoría de conjuntos y combinatoria
 
 Para aprender cálculo de probabilidades son necesarios conocimientos de:
 
